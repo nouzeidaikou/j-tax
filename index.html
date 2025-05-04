@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일본후생연금 탈퇴일시금 청구대행서비스</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #1E90FF;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-left: 30px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #4682B4;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: #1E90FF;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #1E90FF;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #4682B4;
+    }
+    
+    .hero {
+      padding: 150px 0 100px;
+      background-color: #f9f9f9;
+    }
+    
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .hero-text {
+      flex: 1;
+      padding-right: 50px;
+    }
+    
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #1E90FF;
+    }
+    
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #A9A9A9;
+      margin-bottom: 30px;
+    }
+    
+    .hero-image {
+      flex: 1;
+    }
+    
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .section-title h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    .section-title p {
+      color: #A9A9A9;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    
+    .about-image {
+      flex: 1;
+    }
+    
+    .about-image img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    
+    .about-text {
+      flex: 1;
+    }
+    
+    .about-text h3 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    
+    .about-text ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    
+    .about-text li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .about-text li:before {
+      content: "✓";
+      color: #1E90FF;
+      position: absolute;
+      left: 0;
+    }
+    
+    .calculator {
+      background-color: #fff;
+    }
+    
+    .calculator-card {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .tax-refund {
+      background-color: #f9f9f9;
+    }
+    
+    .tax-refund-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+    
+    .tax-refund-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .refund-item {
+      margin-bottom: 20px;
+    }
+    
+    .refund-item h4 {
+      margin-bottom: 10px;
+    }
+    
+    .process {
+      background-color: #fff;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .step-card {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .step-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: #1E90FF;
+      color: white;
+      border-radius: 50%;
+      line-height: 40px;
+      margin-bottom: 15px;
+    }
+    
+    .testimonials {
+      background-color: #f9f9f9;
+    }
+    
+    .testimonial-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .testimonial-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      max-width: 350px;
+    }
+    
+    .testimonial-text {
+      margin-bottom: 20px;
+      font-style: italic;
+      color: #666;
+    }
+    
+    .testimonial-author {
+      font-weight: bold;
+    }
+    
+    .faq {
+      background-color: #fff;
+    }
+    
+    .faq-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+    
+    .faq-question {
+      font-weight: bold;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    
+    .faq-answer {
+      color: #666;
+    }
+    
+    .contact {
+      background-color: #f9f9f9;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+    
+    .contact-form {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: vertical;
+      min-height: 150px;
+    }
+    
+    .contact-info {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .contact-info h3 {
+      margin-bottom: 20px;
+    }
+    
+    .contact-item {
+      margin-bottom: 15px;
+    }
+    
+    .contact-item h4 {
+      margin-bottom: 5px;
+      color: #1E90FF;
+    }
+    
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 50px 0 20px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content, .about-content, .contact-grid, .tax-refund-grid {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-text, .about-text {
+        padding-right: 0;
+        margin-bottom: 30px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const calculateBtn = document.getElementById('calculateBtn');
+      const resultSection = document.getElementById('resultSection');
+      const resultAmount = document.getElementById('resultAmount');
+      
+      calculateBtn.addEventListener('click', function() {
+        const averageSalary = parseFloat(document.getElementById('averageSalary').value) || 0;
+        const paymentMonths = parseInt(document.getElementById('paymentMonths').value) || 0;
+        
+        if (averageSalary <= 0 || paymentMonths <= 0) {
+          alert('올바른 값을 입력해주세요.');
+          return;
+        }
+        
+        // 탈퇴일시금 계산식: 평균보수액 × 납부월수 × 0.003
+        const withdrawalAmount = Math.round(averageSalary * paymentMonths * 0.003);
+        resultAmount.textContent = withdrawalAmount.toLocaleString() + ' 엔';
+        resultSection.style.display = 'block';
+      });
+      
+      // 페이지 내 스크롤 이동을 부드럽게 처리
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">일본후생연금 탈퇴일시금</div>
+        <ul class="nav-links">
+          <li><a href="#about">탈퇴일시금 소개</a></li>
+          <li><a href="#calculator">환급금 계산기</a></li>
+          <li><a href="#tax-refund">소득세 환급</a></li>
+          <li><a href="#process">신청 방법</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact" class="btn">상담 신청</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>일본후생연금 탈퇴일시금 청구대행서비스</h1>
+          <p>일본에서 연금을 납부하셨다면, 탈퇴 후 환급 받을 수 있습니다. 복잡한 절차, 저희가 대신해 드립니다.</p>
+          <a href="#calculator" class="btn">환급금 계산하기</a>
+          <a href="https://forms.gle/7tQ5xaLqSQPFXsVV7" target="_blank" class="btn" style="margin-left: 10px; background-color: #4682B4;">지금 바로 신청하기</a>
+        </div>
+        <div class="hero-image">
+          <img src="./assets/main.jpeg" alt="일본후생연금 탈퇴일시금">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>탈퇴일시금이란?</h2>
+        <p>일본 후생연금에 6개월 이상 가입했던 외국인이 일본을 떠날 때 받을 수 있는 일시금입니다.</p>
+      </div>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="./assets/Japanese Pension Refund Agency.png" alt="탈퇴일시금 안내">
+        </div>
+        <div class="about-text">
+          <h3>탈퇴일시금 신청 자격</h3>
+          <ul>
+            <li>일본 국적을 가지고 있지 않은 외국인</li>
+            <li>후생연금에 6개월(한 달 이상) 이상 가입한 이력이 있는 자</li>
+            <li>일본에 주소를 가지고 있지 않은 자</li>
+            <li>연금을 받을 권리를 가지고 있지 않은 자</li>
+            <li>일본을 출국 후 2년 이내에 신청</li>
+          </ul>
+          <h3>신청 시 유의사항</h3>
+          <p>탈퇴일시금을 받으면 해당 기간의 연금 가입 이력이 소멸됩니다. 일본에 재입국하여 일하게 될 가능성이 있다면, 신중히 결정하시기 바랍니다.</p>
+          <p>또한, 탈퇴일시금에서 20.42%의 소득세가 원천징수되지만, 이 중 일부는 환급받을 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section calculator" id="calculator">
+    <div class="container">
+      <div class="section-title">
+        <h2>탈퇴일시금 계산기</h2>
+        <p>평균보수액과 후생연금 납부월수를 입력하시면 예상 탈퇴일시금을 계산해드립니다.</p>
+      </div>
+      <div class="calculator-card">
+        <div class="input-group">
+          <label for="averageSalary">평균보수액 (엔)</label>
+          <input type="number" id="averageSalary" placeholder="예: 250000">
+          <p style="font-size: 0.9rem; color: #999; margin-top: 5px;">일본에서 받은 월 평균 급여</p>
+        </div>
+        <div class="input-group">
+          <label for="paymentMonths">후생연금 납부월수</label>
+          <input type="number" id="paymentMonths" placeholder="예: 36">
+          <p style="font-size: 0.9rem; color: #999; margin-top: 5px;">후생연금에 납부한 총 개월 수</p>
+        </div>
+        <button id="calculateBtn" class="btn" style="width: 100%;">계산하기</button>
+        
+        <div id="resultSection" style="display: none; margin-top: 30px; text-align: center;">
+          <h3>예상 탈퇴일시금</h3>
+          <p id="resultAmount" style="font-size: 2rem; font-weight: bold; color: #1E90FF; margin: 15px 0;"></p>
+          <p style="color: #999; font-size: 0.9rem;">이 금액은 예상치이며, 실제 지급액은 일본 연금기구의 심사에 따라 달라질 수 있습니다.</p>
+          <a href="https://forms.gle/7tQ5xaLqSQPFXsVV7" target="_blank" class="btn" style="margin-top: 20px;">지금 바로 신청하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tax-refund" id="tax-refund">
+    <div class="container">
+      <div class="section-title">
+        <h2>소득세 환급이란?</h2>
+        <p>탈퇴일시금 수령 시 원천징수된 세금의 일부를 환급받을 수 있습니다.</p>
+      </div>
+      <div class="tax-refund-grid">
+        <div class="tax-refund-card">
+          <h3 style="margin-bottom: 20px;">원천징수 환급 절차</h3>
+          <p style="margin-bottom: 20px; color: #666;">탈퇴일시금 지급 시 20.42%의 소득세가 원천징수됩니다. 그러나 한일 조세조약에 따라 원천징수세액의 최대 10%까지만 과세될 수 있으므로, 나머지 금액은 환급받을 수 있습니다.</p>
+          
+          <div style="display: flex; margin-bottom: 20px; gap: 20px;">
+            <div style="flex: 1; text-align: center; background-color: #f5f5f5; padding: 20px; border-radius: 8px;">
+              <p style="color: #666; margin-bottom: 10px;">탈퇴일시금</p>
+              <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px;">1,000,000엔</p>
+              <p style="font-size: 0.8rem; color: #999;">예시 금액</p>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 1.5rem; color: #1E90FF;">→</span>
+            </div>
+            <div style="flex: 1; text-align: center; background-color: #f5f5f5; padding: 20px; border-radius: 8px;">
+              <p style="color: #666; margin-bottom: 10px;">원천징수액 (20.42%)</p>
+              <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px;">204,200엔</p>
+              <p style="font-size: 0.8rem; color: #999;">원천징수 후 수령액: 795,800엔</p>
+            </div>
+          </div>
+          
+          <div style="background-color: rgba(30, 144, 255, 0.1); padding: 20px; border-radius: 8px;">
+            <h4 style="color: #1E90FF; margin-bottom: 10px;">환급 가능 금액</h4>
+            <div style="display: flex; justify-content: space-between;">
+              <div>
+                <p style="color: #666;">원천징수액:</p>
+                <p style="color: #666;">과세 적용액 (10%):</p>
+                <p style="font-weight: bold;">환급 가능 금액:</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="color: #666;">204,200엔</p>
+                <p style="color: #666;">100,000엔</p>
+                <p style="font-weight: bold; color: #1E90FF;">104,200엔</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tax-refund-card">
+          <h3 style="margin-bottom: 20px;">환급 신청 자격</h3>
+          <ul style="list-style: none; margin-bottom: 30px;">
+            <li style="display: flex; margin-bottom: 15px;">
+              <span style="color: #1E90FF; margin-right: 10px;">✓</span>
+              <span style="color: #666;">탈퇴일시금 환급절차를 종료하신 분</span>
+            </li>
+          </ul>
+          
+          <h4 style="margin-bottom: 15px;">필요 서류</h4>
+          <ul style="list-style: none; color: #666;">
+            <li style="display: flex; margin-bottom: 10px;">
+              <span style="color: #4682B4; margin-right: 10px;">📄</span>
+              <span>탈퇴일시금지급결정통지서</span>
+            </li>
+            <li style="display: flex; margin-bottom: 10px;">
+              <span style="color: #4682B4; margin-right: 10px;">📄</span>
+              <span>여권사본</span>
+            </li>
+            <li style="display: flex; margin-bottom: 10px;">
+              <span style="color: #4682B4; margin-right: 10px;">📄</span>
+              <span>납세관리인 신청서</span>
+            </li>
+          </ul>
+          
+          <a href="https://forms.gle/7tQ5xaLqSQPFXsVV7" target="_blank" class="btn" style="display: block; text-align: center; margin-top: 20px;">지금 바로 신청하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="container">
+      <div class="section-title">
+        <h2>신청 방법 및 준비 서류</h2>
+        <p>복잡한 탈퇴일시금 및 소득세 환급 절차를 저희가 도와드립니다.</p>
+      </div>
+      <div class="process-steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>무료 상담 및 견적</h3>
+          <p>웹사이트 상담 양식이나 전화로 연락해 주시면, 탈퇴일시금 및 소득세 환급 예상 금액을 무료로 계산해 드립니다.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>필요 서류 준비</h3>
+          <p>탈퇴일시금 신청에 필요한 서류와 작성 방법에 대해 상세히 안내해 드립니다.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>서류 제출 및 신청</h3>
+          <p>준비된 서류를 바탕으로 일본 연금기구에 탈퇴일시금을 신청해 드립니다.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>탈퇴일시금 수령</h3>
+          <p>심사가 완료되면 지정하신 계좌로 탈퇴일시금이 입금됩니다. (약 2-3개월 소요)</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <h3>소득세 환급 신청</h3>
+          <p>탈퇴일시금 수령 후, 원천징수된 세금의 일부를 환급받을 수 있도록 일본 세무서에 신청해 드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>고객 후기</h2>
+        <p>저희 서비스를 이용하신 고객님들의 생생한 후기를 확인해보세요.</p>
+      </div>
+      <div class="testimonial-cards">
+        <div class="testimonial-card">
+          <p class="testimonial-text">일본에서 3년간 일하다 귀국했는데, 연금 환급 절차가 복잡해서 걱정했어요. 이 서비스를 통해 모든 서류 작업을 도움 받았고, 예상보다 많은 금액을 환급받았습니다!</p>
+          <p class="testimonial-author">김** 님</p>
+          <p style="color: #999;">도쿄 3년 근무</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">일본어를 잘 몰라 탈퇴일시금 신청이 어려웠는데, 전문가의 도움으로 수월하게 진행했습니다. 소득세 환급까지 한 번에 해결해 주셔서 정말 감사합니다.</p>
+          <p class="testimonial-author">박** 님</p>
+          <p style="color: #999;">오사카 2년 근무</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">5년 간의 일본 생활을 마치고 귀국했는데, 탈퇴일시금과 소득세 환급을 통해 예상보다 많은 금액을 돌려받았습니다. 친절하고 전문적인 서비스에 매우 만족합니다.</p>
+          <p class="testimonial-author">이** 님</p>
+          <p style="color: #999;">후쿠오카 5년 근무</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-title">
+        <h2>자주 묻는 질문</h2>
+        <p>탈퇴일시금 및 소득세 환급에 관한 궁금증을 해결해 드립니다.</p>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question">Q: 탈퇴일시금은 언제 신청해야 하나요?</div>
+          <div class="faq-answer">A: 탈퇴일시금은 일본에서 출국 후 2년 이내에 신청해야 합니다. 출국 전에는 신청할 수 없으며, 2년이 지나면 신청 자격이 상실됩니다. 가능한 빨리 신청하시는 것이 좋습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Q: 탈퇴일시금 금액은 어떻게 결정되나요?</div>
+          <div class="faq-answer">A: 탈퇴일시금 금액은 평균 보수액(월급)과 납부 기간에 따라 결정됩니다. 계산식은 평균 보수액 × 지급률이며, 지급률은 납부 기간에 따라 다릅니다. 정확한 금액은 저희 웹사이트의 계산기를 통해 확인하실 수 있습니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Q: 탈퇴일시금에 소득세가 부과되나요?</div>
+          <div class="faq-answer">A: 네, 탈퇴일시금에는 20.42%의 소득세가 원천징수됩니다. 하지만 한일 조세조약에 따라 원천징수된 세금의 일부를 환급받을 수 있습니다. 저희 서비스는 탈퇴일시금 신청과 함께 소득세 환급 신청도 대행해 드립니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Q: 소득세 환급은 어떻게 신청하나요?</div>
+          <div class="faq-answer">A: 소득세 환급은 탈퇴일시금을 받은 후, 환급 신청서와 함께 필요 서류를 일본 세무서에 제출하여 신청합니다. 필요한 서류로는 환급 신청서, 거주자증명서(한국 세무서 발급), 지급명세서 원본 등이 있습니다. 저희 서비스를 이용하시면 모든 과정을 대행해 드립니다.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">Q: 대행 서비스 비용은 얼마인가요?</div>
+          <div class="faq-answer">A: 서비스 비용은 개인의 상황과 신청 내용에 따라 다를 수 있습니다. 탈퇴일시금 신청만 대행하는 경우와 소득세 환급까지 함께 대행하는 경우의 비용이 다릅니다. 정확한 비용은 무료 상담을 통해 안내해 드리고 있으니, 부담 없이 문의해 주세요.</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <p style="margin-bottom: 20px;">더 궁금한 점이 있으신가요?</p>
+        <a href="https://forms.gle/7tQ5xaLqSQPFXsVV7" target="_blank" class="btn">1:1 상담 신청하기</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>상담 및 신청</h2>
+        <p>전문 상담사가 개인 맞춤형 상담을 제공해 드립니다. 무료 상담을 통해 예상 환급액을 확인해보세요.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-form">
+          <h3 style="margin-bottom: 20px;">무료 상담 신청</h3>
+          <div class="input-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" placeholder="홍길동">
+          </div>
+          <div class="input-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" placeholder="example@email.com">
+          </div>
+          <div class="input-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" placeholder="010-1234-5678">
+          </div>
+          <div class="input-group">
+            <label for="workPeriod">일본 근무 기간</label>
+            <input type="text" id="workPeriod" placeholder="예: 2018년 3월 ~ 2021년 2월">
+          </div>
+          <div class="input-group">
+            <label for="message">문의 내용</label>
+            <textarea id="message" placeholder="궁금한 점이나 문의사항을 자유롭게 작성해주세요."></textarea>
+          </div>
+          <div class="input-group" style="display: flex; align-items: center; margin-top: 10px;">
+            <input type="checkbox" id="agreement" style="width: auto; margin-right: 10px;">
+            <label for="agreement" style="font-size: 0.9rem; color: #666;">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 상담 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</label>
+          </div>
+          <a href="https://forms.gle/7tQ5xaLqSQPFXsVV7" target="_blank" class="btn" style="width: 100%; margin-top: 20px;">지금 바로 신청하기</a>
+        </div>
+        <div class="contact-info">
+          <h3>연락처 정보</h3>
+          <div class="contact-item">
+            <h4>전화 상담</h4>
+            <p>010-1234-5678</p>
+            <p style="font-size: 0.9rem; color: #666;">평일 09:00 - 18:00</p>
+          </div>
+          <div class="contact-item">
+            <h4>이메일 문의</h4>
+            <p>info@japanpension.kr</p>
+          </div>
+          <div class="contact-item">
+            <h4>사무실 위치</h4>
+            <p>서울특별시 강남구 테헤란로 123, 4층</p>
+          </div>
+          
+          <h3 style="margin-top: 40px; margin-bottom: 20px;">빠른 서비스 특징</h3>
+          <ul style="list-style: none;">
+            <li style="margin-bottom: 10px; display: flex; align-items: center;">
+              <span style="color: #1E90FF; margin-right: 10px;">✓</span>
+              <span>무료 상담 및 맞춤형 견적</span>
+            </li>
+            <li style="margin-bottom: 10px; display: flex; align-items: center;">
+              <span style="color: #1E90FF; margin-right: 10px;">✓</span>
+              <span>탈퇴일시금과 소득세 환급 동시 처리</span>
+            </li>
+            <li style="margin-bottom: 10px; display: flex; align-items: center;">
+              <span style="color: #1E90FF; margin-right: 10px;">✓</span>
+              <span>복잡한 서류 대행 작성 및 번역</span>
+            </li>
+            <li style="margin-bottom: 10px; display: flex; align-items: center;">
+              <span style="color: #1E90FF; margin-right: 10px;">✓</span>
+              <span>1:1 전담 상담사 배정</span>
+            </li>
+          </ul>
+          
+          <a href="#" class="btn" style="background-color: #FEE500; color: #000; display: flex; align-items: center; justify-content: center; margin-top: 30px;">
+            <span style="margin-right: 5px;">카카오톡 상담하기</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>일본후생연금 탈퇴일시금 청구대행서비스</h3>
+          <p>일본 후생연금 탈퇴일시금 및 소득세 환급 전문 서비스</p>
+        </div>
+        <div class="footer-column">
+          <h3>서비스 안내</h3>
+          <ul class="footer-links">
+            <li><a href="#about">탈퇴일시금이란?</a></li>
+            <li><a href="#tax-refund">소득세 환급</a></li>
+            <li><a href="#process">신청 방법</a></li>
+            <li><a href="#calculator">환급금 계산기</a></li>
+            <li><a href="#faq">자주 묻는 질문</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>문의 및 상담</h3>
+          <ul class="footer-links">
+            <li>전화: 010-1234-5678</li>
+            <li>이메일: info@japanpension.kr</li>
+            <li>카카오톡: 탈퇴일시금상담</li>
+            <li>운영시간: 평일 09:00 - 18:00</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>회사 정보</h3>
+          <ul class="footer-links">
+            <li>상호: 일본후생연금 탈퇴일시금 청구대행서비스</li>
+            <li>대표: 홍길동</li>
+            <li>사업자등록번호: 123-45-67890</li>
+            <li>주소: 서울특별시 강남구 테헤란로 123, 4층</li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">이용약관</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2023 일본후생연금 탈퇴일시금 청구대행서비스. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 탈퇴일시금 계산기 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const calculateBtn = document.getElementById('calculateBtn');
+      const resultSection = document.getElementById('resultSection');
+      const resultAmount = document.getElementById('resultAmount');
+      
+      calculateBtn.addEventListener('click', function() {
+        const averageSalary = parseFloat(document.getElementById('averageSalary').value);
+        const paymentMonths = parseInt(document.getElementById('paymentMonths').value);
+        
+        if (!averageSalary || !paymentMonths) {
+          alert('평균보수액과 납부월수를 모두 입력해주세요.');
+          return;
+        }
+        
+        if (paymentMonths < 6) {
+          alert('납부월수는 최소 6개월 이상이어야 합니다.');
+          return;
+        }
+        
+        // 지급률 계산
+        let rate = 0;
+        if (paymentMonths >= 6 && paymentMonths <= 11) {
+          rate = 0.4;
+        } else if (paymentMonths >= 12 && paymentMonths <= 17) {
+          rate = 0.8;
+        } else if (paymentMonths >= 18 && paymentMonths <= 23) {
+          rate = 1.2;
+        } else if (paymentMonths >= 24 && paymentMonths <= 29) {
+          rate = 1.6;
+        } else if (paymentMonths >= 30 && paymentMonths <= 35) {
+          rate = 2.0;
+        } else if (paymentMonths >= 36) {
+          rate = 2.4;
+        }
+        
+        // 탈퇴일시금 계산
+        const amount = Math.round(averageSalary * rate);
+        
+        // 결과 표시
+        resultAmount.textContent = amount.toLocaleString() + '엔';
+        resultSection.style.display = 'block';
+      });
+      
+      // FAQ 아코디언 기능
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const answer = this.nextElementSibling;
+          if (answer.style.maxHeight) {
+            answer.style.maxHeight = null;
+            answer.style.marginTop = '0';
+          } else {
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.marginTop = '10px';
+          }
+        });
+      });
+      
+      // 부드러운 스크롤
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
